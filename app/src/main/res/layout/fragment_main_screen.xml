@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.MyTasks"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@color/main_gray"
+    app:layoutDescription="@xml/fragment_main_screen_scene"
+    tools:context=".forms.MainScreenFragment">
+
+
+    <View
+        android:id="@+id/vMainHeader"
+        android:layout_width="match_parent"
+        android:layout_height="164dp"
+        android:background="@color/main_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+
+    <TextView
+        android:id="@+id/tvTitleMainScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="@string/title_main_screen"
+        android:textColor="@color/black"
+        android:textFontWeight="600"
+        android:textSize="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSubTitleTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="126dp"
+        android:text="выполнено - 5"
+        android:textColor="#4D000000"
+        android:textSize="16sp" />
+
+
+    <ImageButton
+        android:id="@+id/ibShowTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:minHeight="30dp"
+        android:minWidth="40dp"
+        android:background="@null"
+        android:src="@drawable/ic_btn_visibility"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleMainScreen"
+        app:layout_constraintEnd_toEndOf="@id/vMainHeader" />
+
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMainTasks"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_rv_tasks"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vMainHeader"
+
+        />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="40dp"
+        app:fabCustomSize="56dp"
+        app:borderWidth="0dp"
+        app:tint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/blue"
+        app:srcCompat="@drawable/ic_baseline_add_24"
+
+        android:elevation="6dp"
+        app:pressedTranslationZ="12dp"/>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+
+
+<!--
+<androidx.constraintlayout.widget.ConstraintLayout
+android:src="@drawable/ic_baseline_add_24"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Theme.MyTasks"
+    tools:context=".forms.MainScreenFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#E5E5E5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:paddingStart="60dp">
+
+            <TextView
+                android:id="@+id/tvTitleMainScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="@string/title_main_screen"
+                android:textFontWeight="600"
+                android:textColor="@color/black"
+                android:layout_marginTop="82dp"
+                android:textSize="32dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="выполнено - 5"
+                android:layout_marginTop="126dp"
+                android:textSize="16sp"
+                android:textColor="#4D000000"
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_btn_visibility"
+                android:background="@null"
+                android:layout_marginTop="126dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="25dp"
+
+
+
+                />
+
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+&lt;!&ndash;    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Мои дела"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvMainTaskList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeader"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMainTasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </androidx.cardview.widget.CardView>&ndash;&gt;
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>-->

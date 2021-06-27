@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="task"
+            type="com.example.mytasks.models.TaskEntity" />
+
+        <variable
+            name="position"
+            type="Integer" />
+        
+        <variable
+            name="callback"
+            type="com.example.mytasks.adapters.TaskListAdapter.TaskAdapterCallback" />
+    </data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="12dp">
+
+    <CheckBox
+        android:id="@+id/chbTaskComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/checkbox_selector"
+        app:useMaterialThemeColors="false"
+        android:gravity="top"
+        android:minWidth="30dp"
+        android:minHeight="30dp"
+        android:checked="@{task.complete}"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toStartOf="@id/llTaskBody"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/llTaskBody"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/chbTaskComplete"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ibTaskInfo">
+
+        <ImageView
+            android:id="@+id/ivTaskPriority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_high"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"/>
+
+
+        <TextView
+            android:id="@+id/tvTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:maxLines="3"
+            android:text="@{task.taskBody}"
+            tools:text="Купить что-то где-то, зачем-то, но зачем не очень понятно" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvDeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/llTaskBody"
+        app:layout_constraintTop_toBottomOf="@+id/llTaskBody"
+        android:text="@{task.deadLine}"
+        android:textSize="14sp"
+        tools:text="29 июня 2021"
+        android:textColor="#4D000000"/>
+
+
+
+
+    <ImageButton
+        android:id="@+id/ibTaskInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="14dp"
+        android:background="@null"
+        android:onClick="@{(view) -> callback.onTaskItemClicked(view, task, position)}"
+        android:src="@drawable/ic_img_task_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/llTaskBody"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
