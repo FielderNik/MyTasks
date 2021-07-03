@@ -56,15 +56,21 @@ class MainScreenFragment : Fragment(), TaskListAdapter.TaskAdapterCallback {
         binding.rvMainTasks.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMainTasks.adapter = adapterTaskRV
 
+        viewModelMainScreen.allTasks.observe(viewLifecycleOwner, Observer { tasks ->
+            val qtyCompletedTask = tasks.filter { it.isComplete == true }.count()
+            binding.tvSubTitleTasks.text = "Выполнено - $qtyCompletedTask"
+            adapterTaskRV.updateList(tasks)
+        })
 
 
+/*
         viewModelMainScreen.tasksLiveData.observe(viewLifecycleOwner, Observer { tasks ->
             val qtyCompletedTask = tasks.filter { it.isComplete == true }.count()
             binding.tvSubTitleTasks.text = "Выполнено - $qtyCompletedTask"
 
             val notCompletedTasks =tasks.filter { it.isComplete == false }
             adapterTaskRV.updateList(notCompletedTasks)
-        })
+        })*/
 
 
 
