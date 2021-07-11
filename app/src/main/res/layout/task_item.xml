@@ -66,6 +66,7 @@
             android:textSize="16sp"
             android:maxLines="3"
             android:text="@{task.taskBody}"
+            android:ellipsize="end"
             tools:text="Купить что-то где-то, зачем-то, но зачем не очень понятно" />
 
 
@@ -77,12 +78,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/llTaskBody"
         app:layout_constraintTop_toBottomOf="@+id/llTaskBody"
-        android:text="@{task.deadLine}"
         android:textSize="14sp"
         tools:text="29 июня 2021"
         android:textColor="#4D000000"/>
-
-
 
 
     <ImageButton

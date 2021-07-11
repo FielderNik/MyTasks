@@ -1,21 +1,25 @@
 package com.example.mytasks.adapters
 
-import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytasks.R
 import com.example.mytasks.databinding.TaskItemBinding
+import com.example.mytasks.models.Priority
 import com.example.mytasks.models.TaskEntity
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TaskListAdapter(private val taskAdapterCallback: TaskAdapterCallback): RecyclerView.Adapter<TaskListAdapter.ViewHolder>() {
 
     interface TaskAdapterCallback {
         fun onTaskItemClicked(v: View, task: TaskEntity, position: Int)
+        fun onCheckItemClicked(task: TaskEntity)
+        fun onUnCheckItemClicked(task: TaskEntity)
     }
 
     val tasks = mutableListOf<TaskEntity>()
@@ -35,16 +39,26 @@ class TaskListAdapter(private val taskAdapterCallback: TaskAdapterCallback): Rec
         holder.binding?.callback = taskAdapterCallback
         holder.binding?.position = position
 
+        if (tasks[position].deadline == 0){
+            holder.binding?.tvDeadline?.visibility = View.GONE
+        } else {
+            val date = Date(tasks[position].deadline * 1000L)
+            val sdf = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+            val dateString = sdf.format(date)
+            holder.binding?.tvDeadline?.text = dateString
+        }
+
+
         when(tasks[position].priority){
-            0 -> {
+            Priority.NONE.value -> {
                 holder.binding?.ivTaskPriority?.setImageDrawable(null)
                 holder.binding?.ivTaskPriority?.visibility = View.GONE
             }
-            1 -> {
+            Priority.LOW.value -> {
                 holder.binding?.ivTaskPriority?.setImageResource(R.drawable.ic_low_priority)
                 holder.binding?.ivTaskPriority?.visibility = View.VISIBLE
             }
-            2 -> {
+            Priority.HIGH.value -> {
                 holder.binding?.ivTaskPriority?.setImageResource(R.drawable.ic_high)
                 holder.binding?.ivTaskPriority?.visibility = View.VISIBLE
             }
@@ -67,17 +81,19 @@ class TaskListAdapter(private val taskAdapterCallback: TaskAdapterCallback): Rec
 
         holder.binding?.chbTaskComplete?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                tasks[position].isComplete = true
-                holder.binding?.tvTask?.apply {
+//                tasks[position].isComplete = true
+                holder.binding.tvTask.apply {
                     paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                     setTextColor(resources.getColor(R.color.tertiary))
                 }
+                taskAdapterCallback.onCheckItemClicked(tasks[position])
             } else {
-                tasks[position].isComplete = false
-                holder.binding?.tvTask?.apply {
+//                tasks[position].isComplete = false
+                holder.binding.tvTask.apply {
                     paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                     setTextColor(resources.getColor(R.color.black))
                 }
+                taskAdapterCallback.onUnCheckItemClicked(tasks[position])
             }
         }
     }
@@ -85,9 +101,11 @@ class TaskListAdapter(private val taskAdapterCallback: TaskAdapterCallback): Rec
     override fun getItemCount(): Int = tasks.size
 
     fun updateList(newTasks: List<TaskEntity>){
+        val tasksDiffUtil = TasksDiffUtil(tasks, newTasks)
+        val diffResult = DiffUtil.calculateDiff(tasksDiffUtil)
         tasks.clear()
         tasks.addAll(newTasks)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     fun removeItem (position: Int){

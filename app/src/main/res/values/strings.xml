@@ -1,7 +1,38 @@
 <resources>
     <string name="app_name">MyTasks</string>
 
+
+    <!-- title -->
     <string name="title_main_screen">Мои дела</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tittle_priority_none">Нет</string>
+    <string name="tittle_priority_low">Низкий</string>
+    <string name="tittle_priority_high">Высокий</string>
+    <string name="title_completed_task">Выполнено %1$s</string>
+
+
+
+    <!-- subtitle -->
+    <string name="subtitle_priority">Важность</string>
+    <string name="subtitle_deadline">Сделать до</string>
+
+
+    <!-- action -->
+    <string name="action_save">Сохранить</string>
+    <string name="action_delete">Удалить</string>
+
+
+    <!-- error -->
+    <string name="error_task_cannot_be_empty">Задача не может быть пустой</string>
+
+
+
+
+
+    <string name="notification_title">Задачи на сегодня</string>
+    <string name="notification_subtitle">Не забудьте</string>
+    <string name="notification_todo">Что необходимо сделать</string>
+
+
+
+
 </resources>

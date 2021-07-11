@@ -7,7 +7,9 @@ import com.example.mytasks.models.TaskEntity
 class DatabaseRepository(private val tasksDao: TaskDao) {
 
 
-
+    suspend fun addTask(taskEntity: TaskEntity) {
+        tasksDao.addTask(taskEntity)
+    }
 
     suspend fun getAllTasksList(): List<TaskEntity> {
         return tasksDao.getAllTasksList()
@@ -16,4 +18,30 @@ class DatabaseRepository(private val tasksDao: TaskDao) {
     suspend fun getAllTasks(): List<TaskEntity> {
         return tasksDao.getAllTask()
     }
+
+    suspend fun getTaskWithFilterCompleted(isComplete: Boolean): List<TaskEntity> {
+        return tasksDao.getTaskWithFilterCompleted(isComplete)
+    }
+
+    suspend fun deleteTask(id: String){
+        return tasksDao.deleteTask(id)
+    }
+
+    suspend fun editTask(taskEntity: TaskEntity) {
+        return tasksDao.editTask(taskEntity.id, taskEntity.taskBody, taskEntity.isComplete, taskEntity.deadline, taskEntity.priority, taskEntity.updatedAt)
+    }
+
+    suspend fun editTaskSynchronised(taskEntity: TaskEntity) {
+        return tasksDao.editTaskSynchronised(taskEntity.id, taskEntity.isSynchronised)
+    }
+
+    suspend fun getSyncValueTask(taskEntity: TaskEntity): Boolean {
+        return tasksDao.getSyncValueTask(taskEntity.id)
+    }
+
+    suspend fun setDeletedFlag(taskEntity: TaskEntity) {
+        return tasksDao.setDeletedFlag(taskEntity.id, taskEntity.isDeleted)
+    }
+
+
 }

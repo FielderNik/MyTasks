@@ -5,10 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.mytasks.models.Priority
 import com.example.mytasks.models.TaskEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 @Database(entities = [TaskEntity::class], version = 1, exportSchema = false)
 abstract class TaskDataBase: RoomDatabase() {
@@ -44,28 +46,84 @@ abstract class TaskDataBase: RoomDatabase() {
         }
 
         val tasks = mutableListOf(
-            TaskEntity(1, "Новая задача, которую надо сделать", "", 1, false),
-            TaskEntity(2, "Новая задача, которую", "", 0, false),
-            TaskEntity(3, "Новая задача", "", 2, true),
             TaskEntity(
-                4,
-                "Новая задача, которую надо сделать, которую надо сделать",
-                "",
-                2,
-                false
+                id = UUID.randomUUID().toString(),
+                taskBody = "Новая задача, которую надо сделать",
+                deadline = 0,
+                priority = Priority.HIGH.value,
+                isComplete = false,
+                createdAt = 0,
+                updatedAt = 0,
+                isSynchronised = false,
+                isDeleted = false,
             ),
             TaskEntity(
-                5,
-                "Новая задача, которую надо сделать, которую надо сделать, которую надо сделать",
-                "",
-                1,
-                true
+                id = UUID.randomUUID().toString(),
+                taskBody = "Еще одна задача",
+                deadline = 0,
+                priority = Priority.HIGH.value,
+                isComplete = true,
+                createdAt = 0,
+                updatedAt = 0,
+                isSynchronised = false,
+                isDeleted = false,
             ),
-            TaskEntity(6, "Новая задача, которую надо сделать", "", 1, true),
-            TaskEntity(7, "Новая задача", "", 0, false)
+            TaskEntity(
+                id = UUID.randomUUID().toString(),
+                taskBody = "Помыть кота",
+                deadline = 1626070910,
+                priority = Priority.LOW.value,
+                isComplete = false,
+                createdAt = 0,
+                updatedAt = 0,
+                isSynchronised = false,
+                isDeleted = false,
+            ),
+            TaskEntity(
+                id = UUID.randomUUID().toString(),
+                taskBody = "Высушить кота",
+                deadline = 1626157310,
+                priority = Priority.NONE.value,
+                isComplete = false,
+                createdAt = 0,
+                updatedAt = 0,
+                isSynchronised = false,
+                isDeleted = false,
+            ),
+            TaskEntity(
+                id = UUID.randomUUID().toString(),
+                taskBody = "Причесать кота",
+                deadline = 1626243710,
+                priority = Priority.LOW.value,
+                isComplete = false,
+                createdAt = 0,
+                updatedAt = 0,
+                isSynchronised = false,
+                isDeleted = false,
+            ),
+            TaskEntity(
+                id = UUID.randomUUID().toString(),
+                taskBody = "Выгнать кота на улицу",
+                deadline = 1626330110,
+                priority = Priority.HIGH.value,
+                isComplete = false,
+                createdAt = 0,
+                updatedAt = 0,
+                isSynchronised = false,
+                isDeleted = false,
+            ),
+            TaskEntity(
+                id = UUID.randomUUID().toString(),
+                taskBody = "Отдохнуть",
+                deadline = 1626416510,
+                priority = Priority.HIGH.value,
+                isComplete = false,
+                createdAt = 0,
+                updatedAt = 0,
+                isSynchronised = false,
+                isDeleted = false,
+            ),
         )
-
-
 
     }
 
