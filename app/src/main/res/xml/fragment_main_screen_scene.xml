@@ -50,7 +50,7 @@
             android:id="@+id/ibShowTasks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintEnd_toEndOf="@id/vMainHeader"
             app:layout_constraintBottom_toBottomOf="@id/vMainHeader">
@@ -101,7 +101,7 @@
             android:id="@+id/ibShowTasks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="@id/vMainHeader"
             app:layout_constraintEnd_toEndOf="@id/vMainHeader">
