@@ -2,10 +2,7 @@ package com.example.mytasks
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.work.Data
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
+import androidx.work.*
 import com.example.mytasks.forms.MainScreenFragment
 import com.example.mytasks.functional.NotifyWork
 import com.example.mytasks.functional.NotifyWork.Companion.NOTIFICATION_WORK
@@ -23,9 +20,14 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack("backstack")
             .commit()
 
-        val data = Data.Builder().putInt(NotifyWork.NOTIFICATION_ID, 0).build()
+/*        val notifyWork = PeriodicWorkRequestBuilder<NotifyWork>(15, TimeUnit.MINUTES, 10, TimeUnit.MINUTES)
+            .build()
+
+        WorkManager.getInstance(this).enqueue(notifyWork)*/
+
+        /*val data = Data.Builder().putInt(NotifyWork.NOTIFICATION_ID, 0).build()
         val delay = 40000L
-        scheduleNotification(delay, data)
+        scheduleNotification(delay, data)*/
     }
 
 

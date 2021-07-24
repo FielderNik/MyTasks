@@ -14,28 +14,22 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class MainScreenViewModel(application: Application) : AndroidViewModel(application) {
+
+class MainScreenViewModel(application: Application) : AndroidViewModel(application), KoinComponent {
 
 
-    private val deleteTaskUseCase = DeleteTaskUseCase(application)
-    private val editTaskUseCase = EditTaskUseCase(application)
+    private val deleteTaskUseCase: DeleteTaskUseCase by inject()
+    private val editTaskUseCase: EditTaskUseCase by inject()
+
+    private val databaseRepository: DatabaseRepository by inject()
+
     val tasksLiveData = MutableLiveData<List<TaskEntity>>()
-    private val databaseRepository: DatabaseRepository
     val allTasks = MutableLiveData<List<TaskEntity>>()
 
-    init {
-        val taskDao = TaskDataBase.getTaskDataBase(application).taskDao()
-        databaseRepository = DatabaseRepository(taskDao)
 
-//        getTaskWithFilterCompleted(false)
-
-    }
-
-/*
-    private fun getAllTasks() {
-        tasksLiveData.value = TaskList.tasks
-    }*/
 
     fun getAllTasks(){
         CoroutineScope(Dispatchers.IO).launch {

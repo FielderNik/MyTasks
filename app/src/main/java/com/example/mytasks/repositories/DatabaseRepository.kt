@@ -3,8 +3,9 @@ package com.example.mytasks.repositories
 import androidx.lifecycle.LiveData
 import com.example.mytasks.data.TaskDao
 import com.example.mytasks.models.TaskEntity
+import org.koin.core.component.KoinComponent
 
-class DatabaseRepository(private val tasksDao: TaskDao) {
+class DatabaseRepository(private val tasksDao: TaskDao): KoinComponent {
 
 
     suspend fun addTask(taskEntity: TaskEntity) {

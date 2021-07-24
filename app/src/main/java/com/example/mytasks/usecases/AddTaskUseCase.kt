@@ -5,8 +5,9 @@ import com.example.mytasks.data.TaskDataBase
 import com.example.mytasks.models.TaskEntity
 import com.example.mytasks.repositories.DatabaseRepository
 import com.example.mytasks.repositories.RemoteRepository
+import org.koin.core.component.KoinComponent
 
-class AddTaskUseCase(application: Application) : BaseUseCase(application) {
+class AddTaskUseCase: BaseUseCase(), KoinComponent {
 
 
     override suspend fun run(taskEntity: TaskEntity) {

@@ -15,31 +15,22 @@ import com.example.mytasks.usecases.EditTaskUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AddEditTaskViewModel(application: Application): AndroidViewModel(application) {
+class AddEditTaskViewModel(application: Application): AndroidViewModel(application), KoinComponent {
 
-    private val addTaskUseCase = AddTaskUseCase(application)
-    private val editTaskUseCase = EditTaskUseCase(application)
-    private val deleteTaskUseCase = DeleteTaskUseCase(application)
+    private val addTaskUseCase: AddTaskUseCase by inject()
+    private val editTaskUseCase: EditTaskUseCase by inject()
+    private val deleteTaskUseCase: DeleteTaskUseCase by inject()
 
-    private val databaseRepository: DatabaseRepository
-    private val api: Api
-    val stringFromRemote = MutableLiveData<String>()
-
-    init {
-        val taskDao = TaskDataBase.getTaskDataBase(application).taskDao()
-        databaseRepository = DatabaseRepository(taskDao)
-        api = Api()
-
-    }
 
     fun addTask(taskEntity: TaskEntity){
         CoroutineScope(Dispatchers.IO).launch {
             addTaskUseCase.run(taskEntity)
-//            databaseRepository.addTask(taskEntity)
         }
     }
 
@@ -54,36 +45,6 @@ class AddEditTaskViewModel(application: Application): AndroidViewModel(applicati
             deleteTaskUseCase.run(taskEntity)
         }
     }
-
-/*    fun addTaskToRemote(testTask: TaskEntity){
-        api.taskService.addNewTask(testTask).enqueue(object : Callback<TaskEntity>{
-            override fun onResponse(call: Call<TaskEntity>, response: Response<TaskEntity>) {
-                Log.d("milk", "response: ${response.body()}")
-                Log.d("milk", "response code: ${response.code()}")
-            }
-
-            override fun onFailure(call: Call<TaskEntity>, t: Throwable) {
-                Log.d("milk", "failure: ${t.stackTraceToString()}")
-            }
-
-        })
-
-
-    }*/
-
-/*    fun getTasksFromRemote() {
-        api.taskService.getTasks().enqueue(object : Callback<List<TestTask>> {
-            override fun onResponse(call: Call<List<TestTask>>, response: Response<List<TestTask>>) {
-                Log.d("milk", "response: ${response.body()}")
-                Log.d("milk", "response code: ${response.code()}")
-            }
-
-            override fun onFailure(call: Call<List<TestTask>>, t: Throwable) {
-                Log.d("milk", "failure: ${t.stackTraceToString()}")
-            }
-
-        })
-    }*/
 
 
 }

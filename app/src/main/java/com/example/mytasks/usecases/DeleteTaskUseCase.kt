@@ -2,8 +2,9 @@ package com.example.mytasks.usecases
 
 import android.app.Application
 import com.example.mytasks.models.TaskEntity
+import org.koin.core.component.KoinComponent
 
-class DeleteTaskUseCase(application: Application): BaseUseCase(application) {
+class DeleteTaskUseCase: BaseUseCase(), KoinComponent {
     override suspend fun run(taskEntity: TaskEntity) {
         taskEntity.isDeleted = true
         databaseRepository.setDeletedFlag(taskEntity)

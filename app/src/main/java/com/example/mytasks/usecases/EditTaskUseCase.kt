@@ -2,8 +2,9 @@ package com.example.mytasks.usecases
 
 import android.app.Application
 import com.example.mytasks.models.TaskEntity
+import org.koin.core.component.KoinComponent
 
-class EditTaskUseCase(application: Application): BaseUseCase(application) {
+class EditTaskUseCase: BaseUseCase(), KoinComponent {
     override suspend fun run(taskEntity: TaskEntity) {
         // записали отредактированную задачу в бд
         databaseRepository.editTask(taskEntity)
