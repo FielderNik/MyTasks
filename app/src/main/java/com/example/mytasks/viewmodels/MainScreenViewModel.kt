@@ -2,17 +2,13 @@ package com.example.mytasks.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.mytasks.data.TaskDataBase
 import com.example.mytasks.models.TaskEntity
 import com.example.mytasks.repositories.DatabaseRepository
-import com.example.mytasks.repositories.TaskList
 import com.example.mytasks.usecases.DeleteTaskUseCase
 import com.example.mytasks.usecases.EditTaskUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack("backstack")
             .commit()
 
-/*        val notifyWork = PeriodicWorkRequestBuilder<NotifyWork>(15, TimeUnit.MINUTES, 10, TimeUnit.MINUTES)
+        val notifyWork = PeriodicWorkRequestBuilder<NotifyWork>(24, TimeUnit.HOURS, 23, TimeUnit.HOURS)
             .build()
 
-        WorkManager.getInstance(this).enqueue(notifyWork)*/
+        WorkManager.getInstance(this).enqueue(notifyWork)
 
         /*val data = Data.Builder().putInt(NotifyWork.NOTIFICATION_ID, 0).build()
         val delay = 40000L

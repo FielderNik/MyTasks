@@ -5,9 +5,6 @@ import com.example.mytasks.models.TaskEntity
 import com.example.mytasks.remote.Api
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class RemoteRepository: KoinComponent {
     private val api: Api by inject()
@@ -18,23 +15,9 @@ class RemoteRepository: KoinComponent {
         if (response.code() == 200){
             result = true
         }
+        Log.d("RemoteRepository", "response: ${response.errorBody()}")
         return result
-/*
 
-        api.taskService.addNewTask(taskEntity).enqueue(object : Callback<TaskEntity> {
-            override fun onResponse(call: Call<TaskEntity>, response: Response<TaskEntity>) {
-                if (response.code() == 200) {
-
-                }
-                Log.d("milk", "response: ${response.body()}")
-                Log.d("milk", "response code: ${response.code()}")
-            }
-
-            override fun onFailure(call: Call<TaskEntity>, t: Throwable) {
-                Log.d("milk", "failure: ${t.stackTraceToString()}")
-            }
-
-        })*/
     }
 
     suspend fun editTaskToRemote(taskEntity: TaskEntity): Boolean {
@@ -43,6 +26,7 @@ class RemoteRepository: KoinComponent {
         if (response.code() == 200){
             result = true
         }
+        Log.d("RemoteRepository", "response: ${response.errorBody()}")
         return result
     }
 
@@ -52,6 +36,7 @@ class RemoteRepository: KoinComponent {
         if (response.code() == 200){
             result = true
         }
+        Log.d("RemoteRepository", "response: ${response.errorBody()}")
         return result
     }
 }
