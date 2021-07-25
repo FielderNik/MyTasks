@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.mytasks.models.TaskEntity
 import com.example.mytasks.repositories.DatabaseRepository
+import com.example.mytasks.repositories.DatabaseRepositoryImpl
 import com.example.mytasks.usecases.DeleteTaskUseCase
 import com.example.mytasks.usecases.EditTaskUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +21,7 @@ class MainScreenViewModel(application: Application) : AndroidViewModel(applicati
     private val deleteTaskUseCase: DeleteTaskUseCase by inject()
     private val editTaskUseCase: EditTaskUseCase by inject()
 
-    private val databaseRepository: DatabaseRepository by inject()
+    private val databaseRepositoryImpl: DatabaseRepositoryImpl by inject()
 
     val tasksLiveData = MutableLiveData<List<TaskEntity>>()
     val allTasks = MutableLiveData<List<TaskEntity>>()
@@ -29,19 +30,19 @@ class MainScreenViewModel(application: Application) : AndroidViewModel(applicati
 
     fun getAllTasks(){
         CoroutineScope(Dispatchers.IO).launch {
-            allTasks.postValue(databaseRepository.getAllTasks())
+            allTasks.postValue(databaseRepositoryImpl.getAllTasks())
         }
     }
 
     fun getTaskWithFilterCompleted(isComplete: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
-            allTasks.postValue(databaseRepository.getTaskWithFilterCompleted(isComplete))
+            allTasks.postValue(databaseRepositoryImpl.getTaskWithFilterCompleted(isComplete))
         }
     }
 
     fun addTask(taskEntity: TaskEntity){
         CoroutineScope(Dispatchers.IO).launch {
-            databaseRepository.addTask(taskEntity)
+            databaseRepositoryImpl.addTask(taskEntity)
         }
     }
 

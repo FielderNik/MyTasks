@@ -40,6 +40,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    testOptions {
+        unitTests{
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -58,6 +65,7 @@ dependencies {
     def retrofit_version = "2.9.0"
     def work_version = "2.5.0"
     def koin_version= "3.1.2"
+    def robolectric_version = "4.4"
 
     //Room
     implementation "androidx.room:room-ktx:$room_version"
@@ -73,4 +81,17 @@ dependencies {
 
     //Koin
     implementation "io.insert-koin:koin-android:$koin_version"
+
+    //Robolectric
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
+
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
+
+    testImplementation 'androidx.test:core:1.4.0'
+    testImplementation 'androidx.test.ext:truth:1.4.0'
+    testImplementation 'com.google.truth:truth:1.0'
+
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "android.arch.core:core-testing:1.1.1"
+
 }
