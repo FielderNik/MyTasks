@@ -1,6 +1,5 @@
 package com.example.mytasks.models
 
-import android.os.Parcel
 import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.Entity
@@ -44,34 +43,4 @@ data class TaskEntity(
         updatedAt: Int,
     ) : this(UUID.randomUUID().toString(), taskBody, deadline, priority, isComplete, createdAt, updatedAt, isSynchronised = false, isDeleted = false)
 
-//    constructor(parcel: Parcel) : this(
-//        parcel.readString(),
-//        parcel.readString(),
-//        parcel.readString(),
-//        parcel.readInt(),
-//        parcel.readByte() != 0.toByte()
-//    ) {
-//    }
-//
-//    override fun writeToParcel(parcel: Parcel, flags: Int) {
-//        parcel.writeString(id)
-//        parcel.writeString(taskBody)
-//        parcel.writeString(deadLine)
-//        parcel.writeInt(priority)
-//        parcel.writeByte(if (isComplete) 1 else 0)
-//    }
-
-//    override fun describeContents(): Int {
-//        return 0
-//    }
-//
-//    companion object CREATOR : Parcelable.Creator<TaskEntity> {
-//        override fun createFromParcel(parcel: Parcel): TaskEntity {
-//            return TaskEntity(parcel)
-//        }
-//
-//        override fun newArray(size: Int): Array<TaskEntity?> {
-//            return arrayOfNulls(size)
-//        }
-//    }
 }

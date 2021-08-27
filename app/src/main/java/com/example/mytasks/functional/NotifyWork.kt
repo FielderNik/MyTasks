@@ -14,8 +14,8 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.createBitmap
 import android.graphics.Canvas
 import android.graphics.Color.RED
+import android.os.Build
 import android.os.Build.VERSION.SDK_INT
-import android.os.Build.VERSION_CODES.O
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_MAX
 import androidx.work.Worker
@@ -59,7 +59,7 @@ class NotifyWork(context: Context, params: WorkerParameters): Worker(context, pa
 
         notification.priority = PRIORITY_MAX
 
-        if (SDK_INT >= O) {
+        if (SDK_INT >= Build.VERSION_CODES.O) {
             notification.setChannelId(NOTIFICATION_CHANNEL)
 
             val channel =

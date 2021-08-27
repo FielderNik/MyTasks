@@ -2,56 +2,47 @@ package com.example.mytasks.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.mytasks.data.TaskDataBase
 import com.example.mytasks.models.TaskEntity
 import com.example.mytasks.repositories.DatabaseRepository
-import com.example.mytasks.repositories.TaskList
+import com.example.mytasks.repositories.DatabaseRepositoryImpl
 import com.example.mytasks.usecases.DeleteTaskUseCase
 import com.example.mytasks.usecases.EditTaskUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class MainScreenViewModel(application: Application) : AndroidViewModel(application) {
+
+class MainScreenViewModel(application: Application) : AndroidViewModel(application), KoinComponent {
 
 
-    private val deleteTaskUseCase = DeleteTaskUseCase(application)
-    private val editTaskUseCase = EditTaskUseCase(application)
+    private val deleteTaskUseCase: DeleteTaskUseCase by inject()
+    private val editTaskUseCase: EditTaskUseCase by inject()
+
+    private val databaseRepositoryImpl: DatabaseRepositoryImpl by inject()
+
     val tasksLiveData = MutableLiveData<List<TaskEntity>>()
-    private val databaseRepository: DatabaseRepository
     val allTasks = MutableLiveData<List<TaskEntity>>()
 
-    init {
-        val taskDao = TaskDataBase.getTaskDataBase(application).taskDao()
-        databaseRepository = DatabaseRepository(taskDao)
 
-//        getTaskWithFilterCompleted(false)
-
-    }
-
-/*
-    private fun getAllTasks() {
-        tasksLiveData.value = TaskList.tasks
-    }*/
 
     fun getAllTasks(){
         CoroutineScope(Dispatchers.IO).launch {
-            allTasks.postValue(databaseRepository.getAllTasks())
+            allTasks.postValue(databaseRepositoryImpl.getAllTasks())
         }
     }
 
     fun getTaskWithFilterCompleted(isComplete: Boolean) {
         CoroutineScope(Dispatchers.IO).launch {
-            allTasks.postValue(databaseRepository.getTaskWithFilterCompleted(isComplete))
+            allTasks.postValue(databaseRepositoryImpl.getTaskWithFilterCompleted(isComplete))
         }
     }
 
     fun addTask(taskEntity: TaskEntity){
         CoroutineScope(Dispatchers.IO).launch {
-            databaseRepository.addTask(taskEntity)
+            databaseRepositoryImpl.addTask(taskEntity)
         }
     }
 
